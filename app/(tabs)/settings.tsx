@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { MaterialIcons } from '@expo/vector-icons';
+import { DeleteIcon } from '../../components/icons';
 import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
 import { router } from 'expo-router';
@@ -27,6 +27,9 @@ export default function SettingsScreen() {
                 DROP TABLE IF EXISTS round_robin_matches;
                 DROP TABLE IF EXISTS round_robin_participants;
                 DROP TABLE IF EXISTS round_robin_tournaments;
+                DROP TABLE IF EXISTS tournament_matches;
+                DROP TABLE IF EXISTS tournament_participants;
+                DROP TABLE IF EXISTS tournament_tournaments;
               `);
 
               // テーブルを再作成（変数なし）
@@ -49,6 +52,30 @@ export default function SettingsScreen() {
                   tournament_id TEXT NOT NULL,
                   player1_id TEXT NOT NULL,
                   player2_id TEXT NOT NULL,
+                  winner_id TEXT,
+                  created_at INTEGER DEFAULT (unixepoch()),
+                  completed_at INTEGER
+                );
+
+                CREATE TABLE IF NOT EXISTS tournament_tournaments (
+                  id TEXT PRIMARY KEY,
+                  created_at INTEGER DEFAULT (unixepoch()),
+                  completed_at INTEGER
+                );
+
+                CREATE TABLE IF NOT EXISTS tournament_participants (
+                  id TEXT PRIMARY KEY,
+                  tournament_id TEXT NOT NULL,
+                  name TEXT NOT NULL,
+                  created_at INTEGER DEFAULT (unixepoch())
+                );
+
+                CREATE TABLE IF NOT EXISTS tournament_matches (
+                  id TEXT PRIMARY KEY,
+                  tournament_id TEXT NOT NULL,
+                  round INTEGER NOT NULL,
+                  player1_id TEXT NOT NULL,
+                  player2_id TEXT,
                   winner_id TEXT,
                   created_at INTEGER DEFAULT (unixepoch()),
                   completed_at INTEGER
@@ -84,7 +111,7 @@ export default function SettingsScreen() {
         <TouchableOpacity
           style={styles.dangerButton}
           onPress={resetDatabase}>
-          <MaterialIcons name="delete" size={24} color="#fff" />
+          <DeleteIcon size={24} color="#fff" />
           <Text style={styles.buttonText}>データベースをリセット</Text>
         </TouchableOpacity>
       </View>

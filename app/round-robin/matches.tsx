@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { atom, useAtom } from 'jotai';
 import { useEffect } from 'react';
+import { EmojiEventsIcon, ArrowForwardIcon } from '../../components/icons';
 
 type Member = {
   id: string;
@@ -94,10 +94,10 @@ export default function RoundRobinMatchesScreen() {
         ]}
         onPress={() => handleWinnerSelect(result.match, rowMember)}>
         {result.isWinner && (
-          <MaterialIcons name="emoji-events" size={16} color="#007AFF" />
+          <EmojiEventsIcon size={16} color="#007AFF" />
         )}
         {result.isLoser && (
-          <MaterialIcons name="close" size={16} color="#FF3B30" />
+          <Text style={styles.loseText}>×</Text>
         )}
         {!result.match.winner && (
           <Text style={styles.vsText}>vs</Text>
@@ -158,8 +158,7 @@ export default function RoundRobinMatchesScreen() {
           styles.buttonText,
           !isAllMatchesComplete && styles.disabledButtonText,
         ]}>結果を確認</Text>
-        <MaterialIcons 
-          name="arrow-forward" 
+        <ArrowForwardIcon 
           size={24} 
           color={isAllMatchesComplete ? "#fff" : "#8E8E93"} 
         />
@@ -244,6 +243,11 @@ const styles = StyleSheet.create({
   disabledText: {
     fontSize: 16,
     color: '#8E8E93',
+  },
+  loseText: {
+    fontSize: 24,
+    color: '#FF3B30',
+    fontWeight: 'bold',
   },
   vsText: {
     fontSize: 14,

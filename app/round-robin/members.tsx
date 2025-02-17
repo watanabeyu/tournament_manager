@@ -9,9 +9,16 @@ import {
   Platform,
 } from 'react-native';
 import { router } from 'expo-router';
-import { MaterialIcons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import Chance from 'chance';
+import { 
+  AddIcon, 
+  ShuffleIcon, 
+  ArrowForwardIcon, 
+  MicIcon, 
+  MicNoneIcon,
+  CancelIcon 
+} from '../../components/icons';
 
 const chance = new Chance();
 
@@ -105,17 +112,17 @@ export default function RoundRobinMembersScreen() {
             <TouchableOpacity
               style={styles.micButton}
               onPress={() => startListening(index)}>
-              <MaterialIcons
-                name={isListening ? 'mic' : 'mic-none'}
-                size={24}
-                color="#007AFF"
-              />
+              {isListening ? (
+                <MicIcon size={24} color="#007AFF" />
+              ) : (
+                <MicNoneIcon size={24} color="#007AFF" />
+              )}
             </TouchableOpacity>
             {members.length > 3 && (
               <TouchableOpacity
                 style={styles.removeButton}
                 onPress={() => removeMember(index)}>
-                <MaterialIcons name="cancel" size={24} color="#FF3B30" />
+                <CancelIcon size={24} color="#FF3B30" />
               </TouchableOpacity>
             )}
           </View>
@@ -124,20 +131,20 @@ export default function RoundRobinMembersScreen() {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.addButton} onPress={addMember}>
-          <MaterialIcons name="add" size={24} color="#fff" />
+          <AddIcon size={24} color="#fff" />
           <Text style={styles.buttonText}>参加者を追加</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.randomButton}
           onPress={generateRandomNames}>
-          <MaterialIcons name="shuffle" size={24} color="#fff" />
+          <ShuffleIcon size={24} color="#fff" />
           <Text style={styles.buttonText}>ランダム生成</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.nextButton} onPress={proceedToMatches}>
           <Text style={styles.buttonText}>対戦表を確認</Text>
-          <MaterialIcons name="arrow-forward" size={24} color="#fff" />
+          <ArrowForwardIcon size={24} color="#fff" />
         </TouchableOpacity>
       </View>
     </View>

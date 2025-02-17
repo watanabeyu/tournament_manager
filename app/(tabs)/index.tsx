@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
+import { ArrowForwardIcon } from '../../components/icons';
 
 export default function StartScreen() {
   return (
@@ -13,7 +13,7 @@ export default function StartScreen() {
             <LinearGradient
               colors={['#4F8EF7', '#2F6CE3']}
               style={styles.button}>
-              <Ionicons name="git-branch-outline" size={32} color="#fff" />
+              <ArrowForwardIcon size={32} color="#fff" />
               <Text style={styles.buttonText}>トーナメント戦</Text>
               <Text style={styles.buttonSubText}>
                 勝ち抜き形式のトーナメントを作成
@@ -27,7 +27,7 @@ export default function StartScreen() {
             <LinearGradient
               colors={['#FF6B6B', '#EE5253']}
               style={styles.button}>
-              <Ionicons name="grid-outline" size={32} color="#fff" />
+              <ArrowForwardIcon size={32} color="#fff" />
               <Text style={styles.buttonText}>総当たり戦</Text>
               <Text style={styles.buttonSubText}>
                 全員が対戦する形式のトーナメントを作成

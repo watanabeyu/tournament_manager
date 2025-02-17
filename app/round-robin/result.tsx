@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { useAtomValue } from 'jotai';
 import { roundRobinMatchesAtom } from './matches';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { saveTournament } from '../../utils/db';
 import { router } from 'expo-router';
+import { EmojiEventsIcon, SaveIcon, CloseIcon } from '../../components/icons';
 
 type ResultRecord = {
   id: string;
@@ -98,7 +98,7 @@ export default function RoundRobinResultScreen() {
                   {index + 1}
                 </Text>
                 {index === 0 && (
-                  <MaterialIcons name="emoji-events" size={16} color="#FFD700" />
+                  <EmojiEventsIcon size={16} color="#FFD700" />
                 )}
               </View>
               <Text style={[
@@ -159,7 +159,7 @@ export default function RoundRobinResultScreen() {
 
       <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
         <Text style={styles.saveButtonText}>保存して終了</Text>
-        <MaterialIcons name="save" size={24} color="#fff" />
+        <SaveIcon size={24} color="#fff" />
       </TouchableOpacity>
     </View>
   );

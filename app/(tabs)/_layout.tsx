@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { MaterialIcons } from '@expo/vector-icons';
+import { TrophyIcon, HistoryIcon, SettingsIcon } from '../../components/icons';
 
 export default function TabLayout() {
   return (
@@ -18,7 +18,7 @@ export default function TabLayout() {
         options={{
           title: 'Start',
           tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="emoji-events" size={size} color={color} />
+            <TrophyIcon size={size} color={color} />
           ),
         }}
       />
@@ -27,7 +27,7 @@ export default function TabLayout() {
         options={{
           title: 'History',
           tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="history" size={size} color={color} />
+            <HistoryIcon size={size} color={color} />
           ),
         }}
       />
@@ -36,7 +36,7 @@ export default function TabLayout() {
         options={{
           title: 'Settings',
           tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="settings" size={size} color={color} />
+            <SettingsIcon size={size} color={color} />
           ),
         }}
       />

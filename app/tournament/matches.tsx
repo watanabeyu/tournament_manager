@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { atom, useAtom } from 'jotai';
 import { useEffect } from 'react';
+import { EmojiEventsIcon, ArrowForwardIcon } from '../../components/icons';
 
 type Member = {
   id: string;
@@ -192,7 +192,7 @@ export default function TournamentMatchesScreen() {
               {match.player1?.name || '未定'}
             </Text>
             {match.winner?.id === match.player1?.id && (
-              <MaterialIcons name="emoji-events" size={16} color="#FFD700" />
+              <EmojiEventsIcon size={16} color="#FFD700" />
             )}
           </TouchableOpacity>
 
@@ -215,7 +215,7 @@ export default function TournamentMatchesScreen() {
               {match.player2 === 'BYE' ? 'BYE' : match.player2?.name || '未定'}
             </Text>
             {match.winner?.id === (match.player2 !== 'BYE' && match.player2 !== null ? match.player2.id : '') && (
-              <MaterialIcons name="emoji-events" size={16} color="#FFD700" />
+              <EmojiEventsIcon size={16} color="#FFD700" />
             )}
           </TouchableOpacity>
         </View>
@@ -252,8 +252,7 @@ export default function TournamentMatchesScreen() {
           styles.buttonText,
           !hasWinner && styles.disabledButtonText,
         ]}>結果を確認</Text>
-        <MaterialIcons 
-          name="arrow-forward" 
+        <ArrowForwardIcon 
           size={24} 
           color={hasWinner ? "#fff" : "#8E8E93"} 
         />

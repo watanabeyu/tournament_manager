@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { Link } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
 import { getTournamentHistory } from '../../utils/db';
+import { TrophyIcon, ArrowForwardIcon } from '../../components/icons';
 
 type HistoryItem = {
   id: string;
@@ -30,9 +30,12 @@ export default function HistoryScreen() {
           return wonMatches.length === participants.length - 1;
         });
 
+        // テーブル名からトーナメントタイプを判定
+        const type = matches.some(m => 'round' in m) ? 'tournament' : 'round-robin';
+
         return {
           id: tournament.id,
-          type: 'round-robin',
+          type,
           date: new Date(tournament.created_at * 1000).toISOString().split('T')[0],
           participants: participants.length,
           winner: winner?.name || '不明',
@@ -49,8 +52,7 @@ export default function HistoryScreen() {
     <Link href={`/history/${item.id}`} asChild>
       <TouchableOpacity style={styles.itemContainer}>
         <View style={styles.iconContainer}>
-          <Ionicons
-            name={item.type === 'tournament' ? 'git-branch-outline' : 'grid-outline'}
+          <TrophyIcon
             size={24}
             color={item.type === 'tournament' ? '#4F8EF7' : '#FF6B6B'}
           />
@@ -67,7 +69,7 @@ export default function HistoryScreen() {
             <Text style={styles.itemWinner}>優勝: {item.winner}</Text>
           </View>
         </View>
-        <Ionicons name="chevron-forward" size={24} color="#C7C7CC" />
+        <ArrowForwardIcon size={24} color="#C7C7CC" />
       </TouchableOpacity>
     </Link>
   );
